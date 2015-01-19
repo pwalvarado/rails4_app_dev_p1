@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RecipeControllerTest < ActionController::TestCase
+class RecipesControllerTest < ActionController::TestCase
   setup do
     @recipe = recipes(:one)
   end
