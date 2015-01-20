@@ -27,8 +27,11 @@
         <td><%= recipe.ingredients %></td>
         <td><%= recipe.procedure %></td>
         <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if user_signed_in? %>
+	  <td><%= link_to 'Edit', edit_recipe_path(recipe), :class=>"btn btn-success btn-small"%></td>
+          <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger btn-small" %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
