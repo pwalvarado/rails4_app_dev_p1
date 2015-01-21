@@ -41,6 +41,9 @@ gem 'spring',        group: :development
 
 gem 'devise', github: 'plataformatec/devise'
 
+gem "polyamorous", :github => "activerecord-hackery/polyamorous"
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller"

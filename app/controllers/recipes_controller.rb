@@ -3,10 +3,13 @@ class RecipesController < ApplicationController
 
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_vars, only: [:index]
+
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @q = Recipe.search(params[:q])
+    @recipes = @q.result(distinct: true).includes([:food_type, :cuisine, :food_type])
   end
 
   # GET /recipes/1
@@ -72,5 +75,11 @@ class RecipesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
       params.require(:recipe).permit(:title, :cooking_time, :difficulty_level, :food_type_id, :food_preference_id, :cuisine_id, :ingredients, :procedure)
+    end
+
+    def set_vars
+      @food_preferences = FoodPreference.all
+      @food_types = FoodType.all
+      @cuisines = Cuisine.all
     end
 end
