@@ -1,9 +1,9 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Recipe: <%= @recipe.title %></h1>
+  </div>
+</div>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
 
 <p>
   <strong>Cooking time:</strong>
@@ -40,5 +40,7 @@
   <%= @recipe.procedure %>
 </p>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<div class="actions">
+  <%= link_to 'Edit', edit_recipe_path(@recipe), class: "btn btn-default" %>
+  <%= link_to 'Back', recipes_path, class: "btn btn-primary" %>
+</div>
