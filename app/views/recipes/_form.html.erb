@@ -1,4 +1,4 @@
-<%= form_for(@recipe) do |f| %>
+<%= bootstrap_form_for(@recipe) do |f| %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
@@ -12,38 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :cooking_time %><br>
     <%= f.text_field :cooking_time %>
   </div>
   <div class="field">
-    <%= f.label :difficulty_level %><br>
     <%= f.select :difficulty_level, Recipe::DIFFICULTY, {}, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :food_type_id %><br>
     <%= f.select(:food_type_id, options_from_collection_for_select(FoodType.all, :id, :name), {:prompt => 'Please Choose'}, :class => "form-control") %>
   </div>
   <div class="field">
-    <%= f.label :food_preference_id %><br>
     <%= f.select(:food_preference_id, options_from_collection_for_select(FoodPreference.all, :id, :name), {:prompt => 'Please Choose'}, :class => "form-control") %>
   </div>
   <div class="field">
-    <%= f.label :cuisine_id %><br>
     <%= f.select(:cuisine_id, options_from_collection_for_select(Cuisine.all, :id, :name), {:prompt => 'Please Choose'}, :class => "form-control") %>
   </div>
   <div class="field">
-    <%= f.label :ingredients %><br>
     <%= f.text_area :ingredients %>
   </div>
   <div class="field">
-    <%= f.label :procedure %><br>
     <%= f.text_area :procedure %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil, class: "btn btn-success" %>
+    <%= link_to 'Back', recipes_path, class: "btn btn-default" %>
   </div>
 <% end %>
