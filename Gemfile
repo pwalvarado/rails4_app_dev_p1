@@ -40,13 +40,14 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise', github: 'plataformatec/devise'
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
 
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 
 gem 'bootstrap_form'
+gem 'friendly_id', '~> 5.1.0'
 
-group :development do
-  gem "better_errors"
-  gem "binding_of_caller"
-end
