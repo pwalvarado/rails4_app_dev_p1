@@ -32,6 +32,9 @@
   <div class="field">
     <%= f.number_field :organizer_id %>
   </div>
+  <div class="field">
+    <%= f.text_field :all_tags, label: "List all tags, separate each tag by a comma" %>
+  </div>
   <div class="actions">
     <%= f.submit nil, class: "btn btn-success" %>
     <%= link_to 'Back', events_path, class: "btn btn-default" %>

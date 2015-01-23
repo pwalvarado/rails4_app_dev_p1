@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123165502) do
+ActiveRecord::Schema.define(version: 20150123205804) do
 
   create_table "cuisines", force: true do |t|
     t.string   "name"
@@ -66,6 +66,22 @@ ActiveRecord::Schema.define(version: 20150123165502) do
     t.integer  "cuisine_id"
     t.text     "ingredients"
     t.text     "procedure"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "taggings", ["event_id"], name: "index_taggings_on_event_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
