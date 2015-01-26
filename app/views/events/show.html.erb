@@ -31,8 +31,9 @@
 </p>
 
 <p>
-  <strong>Organizer:</strong>
-  <%= @event.organizer_id %>
+  <strong>Organizer:</strong><br>
+  <%= image_tag avatar_url(@event.organizer) %>
+  <%= @event.organizer.email %>
 </p>
 
 <p>
