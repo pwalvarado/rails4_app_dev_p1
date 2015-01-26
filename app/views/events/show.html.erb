@@ -37,7 +37,8 @@
 
 <p>
   <strong>Tags:</strong>
-  <%= @event.all_tags %>
+  <%= raw(@event.all_tags.split(" ").map { |t| link_to t, tag_path(t) }.join(', ')) %>
+
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |

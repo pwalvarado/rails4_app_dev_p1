@@ -5,7 +5,11 @@ class EventsController < ApplicationController
   respond_to :html
 
   def index
-    @events = Event.all
+    if params[:tag]
+      @events = Event.tagged_with(params[:tag])
+    else
+      @events = Event.all
+    end
     respond_with(@events)
   end
 
