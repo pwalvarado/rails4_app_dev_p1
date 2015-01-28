@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    get :join, to: 'events#join', as: 'join'
+  end
 
   devise_for :users
   resources :recipes

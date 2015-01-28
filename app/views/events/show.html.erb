@@ -42,5 +42,6 @@
 
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-success"  %>
+<%= link_to "Join", event_join_path(:event_id => @event.id), :class=>"btn btn-primary btn-small" %>
+<%= link_to 'Back', events_path, class: "btn btn-default"  %>

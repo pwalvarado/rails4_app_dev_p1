@@ -7,6 +7,9 @@ class Event < ActiveRecord::Base
   has_many :tags, through: :taggings
 
 
+  has_many :attendances
+  has_many :users, :through => :attendances
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 

@@ -42,6 +42,14 @@ class EventsController < ApplicationController
     respond_with(@event)
   end
 
+  def join
+    @attendance = Attendance.join_event(current_user.id,  params[:event_id], 'request_sent')
+    message = (@attendance.save) ? "Request Sent" : @attendance.errors.full_messages.join(", ")
+    respond_with @attendance do |format|
+      format.html { redirect_to event_path(@attendance.event_id), notice: message }
+    end
+  end
+
   private
     def set_event
       @event = Event.friendly.find(params[:id])
