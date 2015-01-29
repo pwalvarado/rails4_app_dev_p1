@@ -5,3 +5,18 @@
 .css2 { font-size: 1.2em; }
 .css3 { font-size: 1.4em; }
 .css4 { font-size: 1.6em; }
+
+.bs-example {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px 4px 0 0;
+  -webkit-box-shadow: none;
+  position: relative;
+  padding: 15px 15px 15px;
+  margin: 0 -15px 15px;
+  border-style: solid;
+  box-sizing: border-box;
+}

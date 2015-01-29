@@ -4,7 +4,7 @@
   <div class="col-lg-2">
     <div class="panel panel-primary" id="panels">
       <div class="panel-heading">Search Tags</div>
-      <div>
+      <div class="panel-body">
         <% tag_cloud(Event.tag_counts, %w{css1 css2 css3 css4}) do |tag, css_class| %>
           <%= link_to tag.name, tag_path(tag.name), class: css_class %>
         <% end %>

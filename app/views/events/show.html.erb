@@ -1,101 +1,107 @@
 <p id="notice"><%= notice %></p>
 
-<div id="tabs">
+<div class="bs-example" data-example-id="large-well">
 
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#tabs-1">Meetup</a></li>
-    <li role="presentation"><a href="#tabs-2">Join Requests</a></li>
-    <li role="presentation"><a href="#tabs-3">Attendees</a></li>
+<div id="tabs" role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" id="myTab">
+    <li role="presentation" class="active"><a href="#tabs-1" aria-controls="tabs-1" role="tab" data-toggle="tab">Meetup</a></li>
+    <li role="presentation"><a href="#tabs-2" aria-controls="tabs-2" role="tab" data-toggle="tab">Join Requests</a></li>
+    <li role="presentation"><a href="#tabs-3" aria-controls="tabs-3" role="tab" data-toggle="tab">Attendees</a></li>
   </ul>
 
-  <div id="tabs-1">
-    <p>
-      <strong>Title:</strong>
-      <%= @event.title %>
-    </p>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tabs-1">
+      <p>
+        <strong>Title:</strong>
+        <%= @event.title %>
+      </p>
 
-    <p>
-      <strong>Start date:</strong>
-      <%= l @event.start_date %>
-    </p>
+      <p>
+        <strong>Start date:</strong>
+        <%= l @event.start_date %>
+      </p>
 
-    <p>
-      <strong>End date:</strong>
-      <%= l @event.end_date %>
-    </p>
+      <p>
+        <strong>End date:</strong>
+        <%= l @event.end_date %>
+      </p>
 
-    <p>
-      <strong>Location:</strong>
-      <%= @event.location %>
-    </p>
+      <p>
+        <strong>Location:</strong>
+        <%= @event.location %>
+      </p>
 
-    <p>
-      <strong>Agenda:</strong>
-      <%= @event.agenda %>
-    </p>
+      <p>
+        <strong>Agenda:</strong>
+        <%= @event.agenda %>
+      </p>
 
-    <p>
-      <strong>Address:</strong>
-      <%= @event.address %>
-    </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @event.address %>
+      </p>
 
-    <p>
-      <strong>Organizer:</strong><br>
-      <%= image_tag avatar_url(@event.organizer) %>
-      <%= @event.organizer.email %>
-    </p>
+      <p>
+        <strong>Organizer:</strong><br>
+        <%= image_tag avatar_url(@event.organizer) %>
+        <%= @event.organizer.email %>
+      </p>
 
-    <p>
-      <strong>Tags:</strong>
-      <%= raw(@event.all_tags.split(" ").map { |t| link_to t, tag_path(t) }.join(', ')) %>
+      <p>
+        <strong>Tags:</strong>
+        <%= raw(@event.all_tags.split(" ").map { |t| link_to t, tag_path(t) }.join(', ')) %>
 
-    </p>
-  </div>
+      </p>
+    </div>
 
-  <div id="tabs-2">
-    <% if user_signed_in? && @event.organizer_id == current_user.id %>
-      <label>Join Requests</label>
-      <% if @event.pending_requests.present? %>
-        <table class="table">
-          <thead>
-            <tr><th>Applicants</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            <% @event.pending_requests.each do |p| %>
+    <div <div role="tabpanel" class="tab-pane" id="tabs-2">
+      <% if user_signed_in? && @event.organizer_id == current_user.id %>
+        <label>Join Requests</label>
+        <% if @event.pending_requests.present? %>
+          <table class="table">
+            <thead>
+              <tr><th>Applicants</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              <% @event.pending_requests.each do |p| %>
+                <tr><td>
+                <%= image_tag avatar_url(p.user) %>
+                <%= p.user.email%></td>
+                <td>
+                <%= link_to 'Accept', event_accept_request_path(:event_id => @event.id, :attendance_id => p.id), :class=>"btn btn-success btn-small" %>
+                <%= link_to 'Reject', event_reject_request_path(:event_id => @event.id, :attendance_id => p.id), :class=>"btn btn-danger btn-small" %>
+                </td></tr>
+              <% end %>
+            </tbody>
+          </table>
+      <% else %>
+          <p>No pending requests for this event</p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div <div role="tabpanel" class="tab-pane" id="tabs-3">
+      <table class="table">
+        <thead>
+          <tr><th>Attendees</th></tr>
+        </thead>
+        <tbody>
+          <% unless @event.accepted_attendees.empty? %>
+            <% @event.accepted_attendees.each do |p| %>
               <tr><td>
               <%= image_tag avatar_url(p.user) %>
-              <%= p.user.email%></td>
-              <td>
-              <%= link_to 'Accept', event_accept_request_path(:event_id => @event.id, :attendance_id => p.id), :class=>"btn btn-success btn-small" %>
-              <%= link_to 'Reject', event_reject_request_path(:event_id => @event.id, :attendance_id => p.id), :class=>"btn btn-danger btn-small" %>
-              </td></tr>
+              <%= p.user.email%></td></tr>
             <% end %>
-          </tbody>
-        </table>
-    <% else %>
-        <p>No pending requests for this event</p>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div id="tabs-3">
-    <table class="table">
-      <thead>
-        <tr><th>Attendees</th></tr>
-      </thead>
-      <tbody>
-        <% unless @event.accepted_attendees.empty? %>
-          <% @event.accepted_attendees.each do |p| %>
-            <tr><td>
-            <%= image_tag avatar_url(p.user) %>
-            <%= p.user.email%></td></tr>
+          <% else %>
+              <tr><td>No attendees for this event</td></tr>
           <% end %>
-        <% else %>
-            <tr><td>No attendees for this event</td></tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
+</div>
 </div>
 
 <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-success"  %>

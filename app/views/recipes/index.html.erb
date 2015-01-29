@@ -9,7 +9,7 @@
     <%= search_form_for @q , url: recipes_path, :html => { class: 'your-class' } do |f| %>
       <div class="panel panel-primary" id="panels">
         <div class="panel-heading">Food Preferences</div>
-        <div class="panel-content">
+        <div class="panel-body">
         <% @food_preferences.each do |fp| %>
           <div class="checkbox">
             <label><%= check_box_tag('q[food_preference_id_eq_any][]', fp.id,
@@ -23,22 +23,27 @@
       <div class="panel panel-primary" id="panels">
         <div class="panel-heading">Food Type </div>
 
-        <% @food_types.each do |ft| %>
-          <div class="checkbox">
-            <label><%= check_box_tag('q[food_type_id_eq_any][]', ft.id,
-              ((params[:q][:food_type_id_eq_any].include? ft.id.to_s) if params[:q] and params[:q][:food_type_id_eq_any] ) || false ) %><%= ft.name %></label>
-          </div>
-        <%end%>
+        <div class="panel-body">
+          <% @food_types.each do |ft| %>
+            <div class="checkbox">
+              <label><%= check_box_tag('q[food_type_id_eq_any][]', ft.id,
+                ((params[:q][:food_type_id_eq_any].include? ft.id.to_s) if params[:q] and params[:q][:food_type_id_eq_any] ) || false ) %><%= ft.name %></label>
+            </div>
+          <%end%>
+        </div>
       </div>
 
       <div class="panel panel-primary" id="panels">
         <div class="panel-heading">Cuisine</div>
-        <% @cuisines.each do |c| %>
-          <div class="checkbox">
-            <label><%= check_box_tag('q[cuisine_id_eq_any][]', c.id,
-              ((params[:q][:cuisine_id_eq_any].include? c.id.to_s) if  params[:q] and params[:q][:cuisine_id_eq_any]) || false ) %><%= c.name %></label>
-          </div>
-        <%end%>
+
+        <div class="panel-body">
+          <% @cuisines.each do |c| %>
+            <div class="checkbox">
+              <label><%= check_box_tag('q[cuisine_id_eq_any][]', c.id,
+                ((params[:q][:cuisine_id_eq_any].include? c.id.to_s) if  params[:q] and params[:q][:cuisine_id_eq_any]) || false ) %><%= c.name %></label>
+            </div>
+          <%end%>
+        </div>
       </div>
 
       <%= f.submit "Search" %>
