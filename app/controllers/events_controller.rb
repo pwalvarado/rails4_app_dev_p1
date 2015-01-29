@@ -26,7 +26,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    #@event = Event.new(event_params)
     @event = current_user.organized_events.new(event_params)
     @event.save
     respond_with(@event)
@@ -50,6 +49,22 @@ class EventsController < ApplicationController
     end
   end
 
+  def accept_request
+    @attendance = Attendance.find_by(id: params[:attendance_id]) rescue nil
+    message = (@attendance.accept!) ? "Applicant Accepted" : @attendance.errors.full_messages.join(", ")
+    respond_with @attendance do |format|
+      format.html { redirect_to event_path(@attendance.event_id), notice: message }
+    end
+  end
+
+  def reject_request
+    @attendance = Attendance.find_by(id: params[:attendance_id]) rescue nil
+    message = (@attendance.reject!) ? "Applicant Rejected" : @attendance.errors.full_messages.join(", ")
+    respond_with @attendance do |format|
+      format.html { redirect_to event_path(@attendance.event_id), notice: message }
+    end
+  end
+
   private
     def set_event
       @event = Event.friendly.find(params[:id])
@@ -66,5 +81,4 @@ class EventsController < ApplicationController
         flash[:notice] = 'You do not have enough permissions to do this'
       end
     end
-
 end

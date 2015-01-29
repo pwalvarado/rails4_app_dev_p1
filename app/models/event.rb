@@ -40,4 +40,12 @@ class Event < ActiveRecord::Base
   def self.tag_counts
     Tag.select("tags.name, count(taggings.tag_id) as count").joins(:taggings).group("taggings.tag_id")
   end
+
+  def pending_requests
+    Attendance.where(event_id: self.id, state: 'request_sent')
+  end
+
+  def accepted_attendees
+    Attendance.where(event_id: self.id, state: 'accepted')
+  end
 end

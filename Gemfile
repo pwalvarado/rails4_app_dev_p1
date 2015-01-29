@@ -50,4 +50,4 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 
 gem 'bootstrap_form'
 gem 'friendly_id', '~> 5.1.0'
-
+gem 'workflow', :github => 'geekq/workflow'
