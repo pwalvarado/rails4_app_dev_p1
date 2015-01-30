@@ -65,6 +65,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def my_events
+    @events = current_user.organized_events
+  end
+
   private
     def set_event
       @event = Event.friendly.find(params[:id])

@@ -1,16 +1,7 @@
 <h1>Listing events</h1>
 
 <div class="row">
-  <div class="col-lg-2">
-    <div class="panel panel-primary" id="panels">
-      <div class="panel-heading">Search Tags</div>
-      <div class="panel-body">
-        <% tag_cloud(Event.tag_counts, %w{css1 css2 css3 css4}) do |tag, css_class| %>
-          <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render "tag_cloud"%>
 
   <div class="col-lg-10">
     <table class="table">
@@ -41,8 +32,12 @@
             <td><%= raw(event.all_tags.split(" ").map { |t| link_to t, tag_path(t) }.join(', ')) %></td>
 
             <td><%= link_to 'Show', event, :class=>"btn btn-primary btn-small" %></td>
-            <td><%= link_to 'Edit', edit_event_path(event), :class=>"btn btn-success btn-small" %></td>
-            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-small" %></td>
+            <% if user_signed_in? && event.organizer_id == current_user.id%>
+              <td><%= link_to 'Edit', edit_event_path(event), :class=>"btn btn-success btn-small" %></td>
+              <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-small" %></td>
+            <% else %>
+              <td></td><td></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
