@@ -51,3 +51,10 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem 'bootstrap_form'
 gem 'friendly_id', '~> 5.1.0'
 gem 'workflow', :github => 'geekq/workflow'
+
+# Instalar Imagemagick https://gist.github.com/visdesarrollo2/b1c0fa8180d3d1dac916
+gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
+
+#Docs: http://www.rubydoc.info/gems/carrierwave/0.9.0 or
+#      http://railscasts.com/episodes/253-carrierwave-file-uploads
+gem 'carrierwave'

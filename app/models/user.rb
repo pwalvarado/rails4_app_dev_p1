@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, :through => :attendances
+  has_many :boards
 end
