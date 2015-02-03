@@ -14,6 +14,7 @@ class BoardsController < ApplicationController
 
   def new
     @board = Board.new
+    @pin = @board.pins.build
     respond_with(@board)
   end
 
@@ -42,6 +43,6 @@ class BoardsController < ApplicationController
     end
 
     def board_params
-      params.require(:board).permit(:title, :description)
+      params.require(:board).permit(:title, :description, pins_attributes: [:id, :board_id, :image, :name])
     end
 end

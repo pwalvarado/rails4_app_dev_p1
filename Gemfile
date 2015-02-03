@@ -58,3 +58,4 @@ gem 'rmagick', '2.13.2', :git=>'http://github.com/rmagick/rmagick.git'
 #Docs: http://www.rubydoc.info/gems/carrierwave/0.9.0 or
 #      http://railscasts.com/episodes/253-carrierwave-file-uploads
 gem 'carrierwave'
+gem 'kaminari'
